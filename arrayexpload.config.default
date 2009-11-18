@@ -1,0 +1,168 @@
+#format: sh
+#
+#  arrayexpload.config.default
+#
+#  This file sets up the environment variables that are needed by the
+#  ArrayExpress load.
+#
+###########################################################################
+
+#
+#  If the MGICONFIG environment variable does not have a local override,
+#  use the default "live" settings.
+#
+if [ "${MGICONFIG}" = "" ]
+then
+    MGICONFIG=/usr/local/mgi/live/mgiconfig
+    export MGICONFIG
+fi
+
+. ${MGICONFIG}/master.config.sh
+
+###########################################################################
+#
+#  GENERAL SETTINGS
+#
+###########################################################################
+
+# Full path to the association loader.
+#
+ASSOCLOAD_SH=${ASSOCLOAD}/bin/AssocLoad2.sh
+
+export ASSOCLOAD_SH
+
+###########################################################################
+#
+# LOAD SPECIFIC SETTINGS
+#
+###########################################################################
+
+# Full path to the archive, input, output, logs and reports directories.
+#
+FILEDIR=${DATALOADSOUTPUT}/arrayexpress/arrayexpload
+ARCHIVEDIR=${FILEDIR}/archive
+INPUTDIR=${FILEDIR}/input
+OUTPUTDIR=${FILEDIR}/output
+LOGDIR=${FILEDIR}/logs
+RPTDIR=${FILEDIR}/reports
+
+# Full path to the downloaded input file.
+#
+INPUT_FILE=${DATADOWNLOADS}/www.ebi.ac.uk/microarray-as/atlas/download/gene_identifiers.txt
+
+# Full path to the association file that is created from the input file.
+#
+INFILE_NAME=${INPUTDIR}/arrayexp_assoc.txt
+
+# Minimum number of lines expected in the association file.
+#
+INFILE_MINIMUM_SIZE=15000
+
+# Full path to the log files.
+#
+ARRAYEXP_LOGFILE=${LOGDIR}/arrayexpload.log
+LOG_PROC=${LOGDIR}/arrayexpload.proc.log
+LOG_DIAG=${LOGDIR}/arrayexpload.diag.log
+LOG_CUR=${LOGDIR}/arrayexpload.cur.log
+LOG_VAL=${LOGDIR}/arrayexpload.val.log
+
+# Send debug messages to the diagnostic log (true or false).
+#
+LOG_DEBUG=false
+
+export FILEDIR ARCHIVEDIR INPUTDIR OUTPUTDIR LOGDIR RPTDIR
+export INPUT_FILE INFILE_NAME INFILE_MINIMUM_SIZE
+export ARRAYEXP_LOGFILE LOG_PROC LOG_DIAG LOG_CUR LOG_VAL LOG_DEBUG
+
+# The J-Number for the load.
+#
+J_NUMBER=J:153877
+
+# The name of the job stream for the load.
+#
+JOBSTREAM=arrayexp_assocload
+
+export J_NUMBER JOBSTREAM
+
+# Association Loader settings.
+#
+ASSOCLOAD_FROM_FILE=true
+ASSOCLOAD_PRIVATE_ACCID=true
+ASSOCLOAD_TARGET_MGI_TYPE=Marker
+ASSOCLOAD_DELETE_RELOAD=true
+
+export ASSOCLOAD_FROM_FILE ASSOCLOAD_PRIVATE_ACCID
+export ASSOCLOAD_TARGET_MGI_TYPE ASSOCLOAD_DELETE_RELOAD
+
+###########################################################################
+#
+# BCP MANAGER SETTINGS BY DATABASE
+#
+###########################################################################
+
+# Settings used to create a BCP manager for the RADAR database.
+#
+RADAR_BCP_PATH=${OUTPUTDIR}
+RADAR_BCP_AUTO_FLUSH=false
+RADAR_BCP_DROP_INDEXES=false
+RADAR_BCP_OK_TO_OVERWRITE=true
+RADAR_BCP_PREVENT_EXECUTE=false
+RADAR_BCP_RECORD_STAMPING=false
+RADAR_BCP_TRUNCATE_LOG=true
+RADAR_BCP_TRUNCATE_TABLE=false
+
+export RADAR_BCP_PATH RADAR_BCP_AUTO_FLUSH
+export RADAR_BCP_DROP_INDEXES RADAR_BCP_OK_TO_OVERWRITE
+export RADAR_BCP_PREVENT_EXECUTE RADAR_BCP_RECORD_STAMPING
+export RADAR_BCP_TRUNCATE_LOG RADAR_BCP_TRUNCATE_TABLE
+
+# Settings used to create a BCP manager for the MGD database.
+#
+MGD_BCP_PATH=${OUTPUTDIR}
+MGD_BCP_AUTO_FLUSH=false
+MGD_BCP_DROP_INDEXES=false
+MGD_BCP_OK_TO_OVERWRITE=true
+MGD_BCP_PREVENT_EXECUTE=false
+MGD_BCP_RECORD_STAMPING=false
+MGD_BCP_TRUNCATE_LOG=true
+MGD_BCP_TRUNCATE_TABLE=false
+
+export MGD_BCP_PATH MGD_BCP_AUTO_FLUSH
+export MGD_BCP_DROP_INDEXES MGD_BCP_OK_TO_OVERWRITE
+export MGD_BCP_PREVENT_EXECUTE MGD_BCP_RECORD_STAMPING
+export MGD_BCP_TRUNCATE_LOG MGD_BCP_TRUNCATE_TABLE
+
+###########################################################################
+#
+# BCP SETTINGS BY TABLE (OVERRIDE BCP MANAGER SETTINGS)
+#
+###########################################################################
+
+# RADAR database table settings.
+#
+MGI_ASSOCIATION_BCP_PRESQL="delete MGI_Association from MGI_Association a, APP_JobStream j where a._JobStream_key = j._JobStream_key and j.jobStreamName = '${JOBSTREAM}'"
+
+export MGI_ASSOCIATION_BCP_PRESQL
+
+###########################################################################
+#
+# MISCELLANEOUS SETTINGS
+#
+###########################################################################
+
+# The name of the load for the subject of an email notification.
+#
+MAIL_LOADNAME="ArrayExpress Association Load"
+
+# Recipient list for mailing the log files (comma-separated).
+#
+MAIL_LOG_PROC="mgiadmin"
+MAIL_LOG_CUR="mgiadmin"
+
+export MAIL_LOADNAME MAIL_LOG_PROC MAIL_LOG_CUR
+
+# Installation directory for the ArrayExpress association load.
+#
+INSTALLDIR=${ARRAYEXPLOAD}
+
+export INSTALLDIR
