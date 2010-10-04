@@ -1,3 +1,12 @@
+TAG: arrayexpload-4-4-0-1
+DATE: 10/4/2010
+STAFF: dbm
+CHANGES:
+1) arrayexpload.config.default: change INPUT_FILE setting to reflect the
+   new path to the downloaded input file
+2) arrayexpload.sh: changed the parsing of the input file because the
+   keyword changed from gene_dbxref to dbxref in column 1
+
 TAG: arrayexpload-4-3-2-1
 DATE: 11/18/2009
 STAFF: dbm
