@@ -109,7 +109,7 @@ date >> ${LOG}
 echo "Create the association file" | tee -a ${LOG}
 rm -f ${INFILE_NAME}
 echo "MGI	ArrayExpress" > ${INFILE_NAME}
-cat ${INPUT_FILE} | grep "^dbxref	MGI:" | cut -d'	' -f2 | sed 's/.*/&	&/' >> ${INFILE_NAME}
+cat ${INPUT_FILE} | grep "^mgi_id	MGI:" | cut -d'	' -f2 | sed 's/.*/&	&/' >> ${INFILE_NAME}
 
 #
 # Make sure the association file has a minimum number of lines before the
