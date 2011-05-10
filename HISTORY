@@ -1,3 +1,10 @@
+TAG: arrayexpload-4-4-1-1
+DATE: 5/10/2011
+STAFF: dbm
+CHANGES:
+1) arrayexpload.sh: changed the parsing of the input file because the
+   keyword changed from dbxref to mgi_id in column 1
+
 TAG: arrayexpload-4-4-0-2
 DATE: 10/11/2010
 STAFF: dbm
