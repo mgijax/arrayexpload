@@ -48,7 +48,7 @@ RPTDIR=${FILEDIR}/reports
 
 # Full path to the downloaded input file.
 #
-INPUT_FILE=${DATADOWNLOADS}/www.ebi.ac.uk/gxa/download/gene_identifiers.txt
+INPUT_FILE=${DATADOWNLOADS}/ftp.ebi.ac.uk/pub/databases/arrayexpress/data/atlas/bioentity_properties/ensembl/mus_musculus.ensgene.tsv
 
 # Full path to the association file that is created from the input file.
 #
