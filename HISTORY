@@ -1,3 +1,11 @@
+TAG: arrayexpload-5-1-7-1
+DATE: 4/11/2014
+STAFF: dbm
+CHANGES:
+1) bin/arrayexpload.sh: updates to parse a different input file
+2) arrayexpload.config.default: updated for new input file
+3) index.html: updated for new input file
+
 TAG: arrayexpload-4-4-1-1
 DATE: 5/10/2011
 STAFF: dbm
