@@ -100,16 +100,29 @@ fi
 
 #
 # Create the association file by extracting the MGI IDs from the input file
-# and using them for both the target and associate accession IDs. Lines with
-# MGI IDs should have the following format:
+# and using them for both the target and associate accession IDs.
 #
-# gene_dbxref <TAB> MGI:nnnnnn
+# The parsing of the input file is handled as follows:
+# 
+# 1) Skip the header record.
+# 2) Cut out the 16th field with the MGI ID(s).
+# 3) Remove any blank lines (ones that have nothing in field 16).
+# 4) Remove any lines with multiple MGI IDs delimited by "@@".
+# 5) Remove any duplicate MGI IDs using a unique sort.
+# 6) Replicate the MGI ID within each line so there are 2 identical fields,
+#    separated by a tab. The association loader needs this. For example:
+#
+#        MGI:1111111
+#
+#    becomes:
+#
+#        MGI:1111111<tab>MGI:1111111
 #
 date >> ${LOG}
 echo "Create the association file" | tee -a ${LOG}
 rm -f ${INFILE_NAME}
 echo "MGI	ArrayExpress" > ${INFILE_NAME}
-cat ${INPUT_FILE} | grep "^mgi_id	MGI:" | cut -d'	' -f2 | sed 's/.*/&	&/' >> ${INFILE_NAME}
+cat ${INPUT_FILE} | tail +2 | cut -d'	' -f16 | grep -v "^$" | grep -v "@@" | sort -u | sed 's/.*/&	&/' >> ${INFILE_NAME}
 
 #
 # Make sure the association file has a minimum number of lines before the
