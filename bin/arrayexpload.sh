@@ -122,7 +122,7 @@ date >> ${LOG}
 echo "Create the association file" | tee -a ${LOG}
 rm -f ${INFILE_NAME}
 echo "MGI	ArrayExpress" > ${INFILE_NAME}
-cat ${INPUT_FILE} | tail +2 | cut -d'	' -f16 | grep -v "^$" | grep -v "@@" | sort -u | sed 's/.*/&	&/' >> ${INFILE_NAME}
+cat ${INPUT_FILE} | tail -n +2 | cut -d'	' -f16 | grep -v "^$" | grep -v "@@" | sort -u | sed 's/.*/&	&/' >> ${INFILE_NAME}
 
 #
 # Make sure the association file has a minimum number of lines before the
