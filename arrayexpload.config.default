@@ -140,7 +140,7 @@ export MGD_BCP_TRUNCATE_LOG MGD_BCP_TRUNCATE_TABLE
 
 # RADAR database table settings.
 #
-MGI_ASSOCIATION_BCP_PRESQL="delete MGI_Association from MGI_Association a, APP_JobStream j where a._JobStream_key = j._JobStream_key and j.jobStreamName = '${JOBSTREAM}'"
+MGI_ASSOCIATION_BCP_PRESQL="delete from MGI_Association using APP_JobStream j where mgi_association._JobStream_key = j._JobStream_key and j.jobStreamName = '${JOBSTREAM}'"
 
 export MGI_ASSOCIATION_BCP_PRESQL
 
