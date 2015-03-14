@@ -143,7 +143,6 @@ fi
 #
 # Call the wrapper for the association load.
 #
-echo "assocload = $ASSOCLOAD_SH and config = $CONFIG"
 echo "" >> ${LOG}
 date >> ${LOG}
 echo "Load the associations" | tee -a ${LOG}
