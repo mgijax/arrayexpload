@@ -91,7 +91,7 @@ touch ${LOG}
 LASTRUN_FILE=${INPUTDIR}/lastrun
 if [ -f ${LASTRUN_FILE} ]
 then
-    if /usr/local/bin/test ${LASTRUN_FILE} -nt ${INPUT_FILE}
+    if test ${LASTRUN_FILE} -nt ${INPUT_FILE}
     then
         echo "Input file has not been updated - skipping load" | tee -a ${LOG}
         exit 0
