@@ -154,12 +154,7 @@ export MGI_ASSOCIATION_BCP_PRESQL
 #
 MAIL_LOADNAME="ArrayExpress Association Load"
 
-# Recipient list for mailing the log files (comma-separated).
-#
-MAIL_LOG_PROC="mgiadmin"
-MAIL_LOG_CUR="mgiadmin"
-
-export MAIL_LOADNAME MAIL_LOG_PROC MAIL_LOG_CUR
+export MAIL_LOADNAME
 
 # Installation directory for the ArrayExpress association load.
 #
