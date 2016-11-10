@@ -105,8 +105,8 @@ fi
 # The parsing of the input file is handled as follows:
 # 
 # 1) Skip the header record.
-# 2) Cut out the 16th field with the MGI ID(s).
-# 3) Remove any blank lines (ones that have nothing in field 16).
+# 2) Cut out the 15th field with the MGI ID(s).
+# 3) Remove any blank lines (ones that have nothing in field 15).
 # 4) Remove any lines with multiple MGI IDs delimited by "@@".
 # 5) Remove any duplicate MGI IDs using a unique sort.
 # 6) Replicate the MGI ID within each line so there are 2 identical fields,
@@ -122,7 +122,7 @@ date >> ${LOG}
 echo "Create the association file" | tee -a ${LOG}
 rm -f ${INFILE_NAME}
 echo "MGI	ArrayExpress" > ${INFILE_NAME}
-cat ${INPUT_FILE} | tail -n +2 | cut -d'	' -f16 | grep -v "^$" | grep -v "@@" | sort -u | sed 's/.*/&	&/' >> ${INFILE_NAME}
+cat ${INPUT_FILE} | tail -n +2 | cut -d'	' -f15 | grep -v "^$" | grep -v "@@" | sort -u | sed 's/.*/&	&/' >> ${INFILE_NAME}
 
 #
 # Make sure the association file has a minimum number of lines before the
